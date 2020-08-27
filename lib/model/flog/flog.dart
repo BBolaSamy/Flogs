@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:f_logs/f_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -23,19 +21,18 @@ class FLog {
   //Public Methods:-------------------------------------------------------------
   /// logThis
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static void logThis({
+  static logThis({
     String className,
     String methodName,
     @required String text,
     @required LogLevel type,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -48,17 +45,16 @@ class FLog {
 
   /// trace
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void trace({
+  static trace({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -68,17 +64,16 @@ class FLog {
 
   /// debug
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void debug({
+  static debug({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -88,17 +83,16 @@ class FLog {
 
   /// info
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void info({
+  static info({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -108,17 +102,16 @@ class FLog {
 
   /// warning
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void warning({
+  static warning({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -128,17 +121,16 @@ class FLog {
 
   /// error
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void error({
+  static error({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -148,17 +140,16 @@ class FLog {
 
   /// severe
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void severe({
+  static severe({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -168,17 +159,16 @@ class FLog {
 
   /// fatal
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static void fatal({
+  static fatal({
     String className,
     String methodName,
     @required String text,
-    dynamic exception,
+    Exception exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -188,9 +178,8 @@ class FLog {
 
   /// printLogs
   ///
-  /// This will return array of logs and print them as a string using
-  /// StringBuffer()
-  static void printLogs() async {
+  /// This will return array of logs and print them as a string using StringBuffer()
+  static printLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
     _getAllLogs().then((logs) {
@@ -210,15 +199,13 @@ class FLog {
 
   /// printDataLogs
   ///
-  /// This will return array of logs grouped by dataType and print them as a
-  /// string using StringBuffer()
-  static void printDataLogs({
-    List<String> dataLogsType,
-    List<String> logLevels,
-    int startTimeInMillis,
-    int endTimeInMillis,
-    FilterType filterType,
-  }) async {
+  /// This will return array of logs grouped by dataType and print them as a string using StringBuffer()
+  static printDataLogs(
+      {List<String> dataLogsType,
+      List<String> logLevels,
+      int startTimeInMillis,
+      int endTimeInMillis,
+      FilterType filterType}) async {
     print(Constants.PRINT_DATA_LOG_MSG);
 
     _getAllSortedByFilter(
@@ -246,32 +233,32 @@ class FLog {
   /// printFileLogs
   ///
   /// This will print logs stored in a file as string using StringBuffer()
-  static void printFileLogs() async {
+  static printFileLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
-    _storage.readLogsToFile().then(print);
+    _storage.readLogsToFile().then((content) {
+      print(content);
+    });
   }
 
   /// exportLogs
   ///
   /// This will export logs to external storage under FLog directory
-  static Future<File> exportLogs() async {
+  static exportLogs() async {
     var buffer = StringBuffer();
 
     print(Constants.PRINT_EXPORT_MSG);
 
     //get all logs and write to file
-    final logs = await _getAllLogs();
+    _getAllLogs().then((logs) {
+      logs.forEach((log) {
+        buffer.write(Formatter.format(log, _config));
+      });
 
-    logs.forEach((log) {
-      buffer.write(Formatter.format(log, _config));
+      _storage.writeLogsToFile(buffer.toString());
+      print(buffer.toString());
+      buffer.clear();
     });
-
-    // writing logs to file and returning file object
-    final file = await _storage.writeLogsToFile(buffer.toString());
-    print(buffer.toString());
-    buffer.clear();
-    return file;
   }
 
   /// getAllLogs
@@ -283,7 +270,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -307,14 +294,14 @@ class FLog {
               endTimeInMillis: endTimeInMillis,
               filterType: filterType));
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
   /// getAllLogsByCustomFilter
   ///
-  /// This will return the list of logs stored based on the custom filters
-  /// provided by the user
+  /// This will return the list of logs stored based on the custom filters provided
+  /// by the user
   static Future<List<Log>> getAllLogsByCustomFilter(
       {List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
@@ -322,43 +309,43 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
   /// clearLogs
   ///
   /// This will clear all the logs stored in database
-  static Future<void> clearLogs() async {
-    await _flogDao.deleteAll();
+  static clearLogs() {
+    _flogDao.deleteAll();
     print("Logs Cleared!");
   }
 
   /// deleteAllLogsByFilter
   ///
   /// This will delete logs by provided filters
-  static Future<void> deleteAllLogsByFilter({List<Filter> filters}) async {
+  static deleteAllLogsByFilter({List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
-      var deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
+      int deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
       print("Deleted $deleted logs");
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
   /// applyConfigurations
   ///
   /// This will apply user provided configurations to FLogs
-  static void applyConfigurations(LogsConfig config) {
+  static applyConfigurations(LogsConfig config) {
     _config = config;
 
     //check to see if encryption is enabled
     if (_config.encryptionEnabled) {
       //check to see if encryption key is provided
       if (_config.encryptionKey.isEmpty) {
-        throw Exception(Constants.EXCEPTION_NULL_KEY);
+        throw new Exception(Constants.EXCEPTION_NULL_KEY);
       }
     }
   }
@@ -374,8 +361,7 @@ class FLog {
   //Private Methods:------------------------------------------------------------
   /// _logThis
   ///
-  /// Logs 'String' data along with class & function name to hourly based file
-  /// with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -386,7 +372,7 @@ class FLog {
       String methodName,
       String text,
       LogLevel type,
-      dynamic exception,
+      Exception exception,
       String dataLogType,
       StackTrace stacktrace) {
     assert(text != null);
@@ -408,7 +394,7 @@ class FLog {
     //if not then don't do anything
     if (_isLogsConfigValid()) {
       //creating log object
-      final log = Log(
+      Log log = Log(
         className: className,
         methodName: methodName,
         text: text,
@@ -423,7 +409,7 @@ class FLog {
       //writing it to DB
       _writeLogs(log);
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -436,7 +422,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -449,7 +435,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -462,30 +448,28 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (_config.activeLogLevel != null) {
-        // skip write logs when log level is to low
-        if (LogLevel.values.indexOf(_config.activeLogLevel) <=
-                LogLevel.values.indexOf(log.logLevel) &&
-            _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
-          await _flogDao.insert(log);
+      if (LogLevel.values.indexOf(_config.activeLogLevel) <=
+              LogLevel.values.indexOf(log.logLevel) &&
+          _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
+        await _flogDao.insert(log);
 
-          //check to see if logcat debugging is enabled
-          if (_config.isDebuggable) {
-            print(Formatter.format(log, _config));
-          }
+        //check to see if logcat debugging is enabled
+        if (_config.isDebuggable) {
+          print(Formatter.format(log, _config));
         }
-      } else {
-        throw Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
+
+        LogsStorage.instance.writeLogsToFile(Formatter.format(log, _config));
       }
     } else {
-      throw Exception(Constants.EXCEPTION_NOT_INIT);
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
   /// _isLogsConfigValid
   ///
   /// This will check if user provided any configuration and logs are enabled
-  /// if yes, then it will return true else it will return false
+  /// if yes, then it will return true
+  /// else it will return false
   static _isLogsConfigValid() {
     return _config != null && _config.isLogsEnabled;
   }
