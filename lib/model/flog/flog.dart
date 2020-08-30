@@ -358,6 +358,11 @@ class FLog {
     return _config;
   }
 
+  static String getTextFromObject(Object obj) {
+    if (obj == null) return 'null';
+    return obj.toString();
+  }
+
   //Private Methods:------------------------------------------------------------
   /// _logThis
   ///
@@ -397,7 +402,7 @@ class FLog {
       Log log = Log(
         className: className,
         methodName: methodName,
-        text: text,
+        text: getTextFromObject(text),
         logLevel: type,
         dataLogType: dataLogType,
         exception: exception.toString(),
