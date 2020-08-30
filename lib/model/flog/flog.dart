@@ -91,7 +91,7 @@ class FLog {
   static info({
     String className,
     String methodName,
-    @required String text,
+    @required Object text,
     Exception exception,
     String dataLogType,
     StackTrace stacktrace,
@@ -375,7 +375,7 @@ class FLog {
   static void _logThis(
       String className,
       String methodName,
-      String text,
+      Object text,
       LogLevel type,
       Exception exception,
       String dataLogType,
