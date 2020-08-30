@@ -392,7 +392,12 @@ class FLog {
     //check to see if methodName is not provided
     //then its already been taken from calling class
     if (methodName == null) {
-      methodName = Trace.current().frames[2].member.split(".")[1];
+      try {
+        methodName = Trace.current().frames[2].member.split(".")[1];
+      }
+      catch(e) {
+        methodName = "null";
+      }
     }
 
     //check to see if user provides a valid configuration and logs are enabled
